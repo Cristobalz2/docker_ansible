@@ -51,22 +51,27 @@ resource "aws_instance" "master1" {
 
     provisioner "remote-exec" {
       inline = [
-        "mv /home/ec2-user/ansible-docker/remote-key",
         "chmod +x /home/ec2-user/ansible-docker/docker_ansible.sh",
         "/home/ec2-user/ansible-docker/docker_ansible.sh"
       ]
     }
+  
     connection {
       type        = "ssh"
       user        = "ec2-user"
       private_key = file("~/.ssh/remote-key")
       host        = aws_instance.master1.public_ip
     }
-#    user_data = file("docker_ansible.sh")
-#     root_block_device {
-#         volume_size = "40"
-#         volume_type = "standard"
-#   }
+    
+	  user_data = <<-EOF
+              #! /bin/bash
+              echo "hello world"
+              EOF 
+              
+    root_block_device {
+        volume_size = "40"
+        volume_type = "standard"
+  }
     tags = {
         Name = "server_ansible"
         Owner = "server"
