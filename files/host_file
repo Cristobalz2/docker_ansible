@@ -1,4 +1,3 @@
 [server1]
-3.85.88.5 ansible_user=ec2-user ansible_private_key_file=remote-key
-3.91.237.37 ansible_user=ec2-user ansible_private_key_file=remote-key
+
 
