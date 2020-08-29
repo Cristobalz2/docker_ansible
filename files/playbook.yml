@@ -1,0 +1,19 @@
+---
+- hosts: server1
+  become: true
+    
+  tasks:
+    - name: upgrade all packages
+      yum:
+        name: '*'
+        state: latest
+
+    - name: install the latest version of Apache
+      yum:
+        name: httpd
+        state: present
+    
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
