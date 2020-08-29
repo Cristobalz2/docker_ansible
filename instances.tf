@@ -41,19 +41,19 @@ resource "aws_instance" "master1" {
     }
   }
     provisioner "file" {
-      source      = "files"
-      destination = "/home/ec2-user/files"  
+      source      = "ansible-docker"
+      destination = "/home/ec2-user/ansible-docker"  
     }
     provisioner "file" {
       source      = "~/.ssh/remote-key"
-      destination = "/home/ec2-user/files/remote-key"  
+      destination = "/home/ec2-user/ansible-docker/remote-key"  
     }
 
     provisioner "remote-exec" {
       inline = [
-        "mv /home/ec2-user/files/remote-key",
-        "chmod +x /home/ec2-user/files/docker_ansible.sh",
-        "/home/ec2-user/files/docker_ansible.sh"
+        "mv /home/ec2-user/ansible-docker/remote-key",
+        "chmod +x /home/ec2-user/ansible-docker/docker_ansible.sh",
+        "/home/ec2-user/ansible-docker/docker_ansible.sh"
       ]
     }
     connection {
