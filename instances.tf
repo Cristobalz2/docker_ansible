@@ -33,7 +33,7 @@ resource "aws_instance" "master1" {
     associate_public_ip_address = true
     key_name = var.key 
     provisioner "local-exec" {
-      command = "./files/replace.sh $HOST1 $HOST2"
+      command = "./ansible-docker/replace.sh $HOST1 $HOST2"
 
       environment = {
         HOST1 = aws_instance.host1.public_ip
